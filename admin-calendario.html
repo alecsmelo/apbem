@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador do Calendário — Apbem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/estilo.css">
+  <style>
+    .admin-page {
+      padding: 40px 0 72px;
+      background: #F8FAFC;
+    }
+
+    .admin-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .admin-page-title {
+      font-size: 2rem;
+      color: #0F172A;
+      margin: 4px 0 6px;
+    }
+
+    .admin-subtitle {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    .admin-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 28px 32px;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      margin-bottom: 28px;
+    }
+
+    .admin-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .admin-field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .admin-field input,
+    .admin-field select,
+    .admin-field textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 11px 14px;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #0F172A;
+      background: #FFFFFF;
+      transition: border-color 0.2s ease;
+    }
+
+    .admin-field input:focus,
+    .admin-field select:focus,
+    .admin-field textarea:focus {
+      outline: none;
+      border-color: #2578D9;
+    }
+
+    .admin-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 8px;
+      border-top: 1px solid #F1F5F9;
+    }
+
+    .btn-admin-novo {
+      background: #F1F5F9;
+      color: #0F172A;
+      border: 2px solid #CBD5E1;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-admin-novo:hover {
+      background: #E2E8F0;
+    }
+
+    .btn-admin-salvar {
+      background: #16A34A;
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-admin-salvar:hover {
+      background: #15803D;
+    }
+
+    .dias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
+    }
+
+    .dia-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      transition: border-color 0.2s ease;
+    }
+
+    .dia-card.is-fds {
+      background: #FFFBEB;
+      border-color: #FDE68A;
+    }
+
+    .dia-card.is-aviso {
+      border-color: #FCA5A5;
+      background: #FEF2F2;
+    }
+
+    .dia-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .dia-card-titulo {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #0F172A;
+    }
+
+    .dia-card-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #E2E8F0;
+      color: #475569;
+    }
+
+    .dia-card.is-fds .dia-card-badge {
+      background: #FEF3C7;
+      color: #B45309;
+    }
+
+    .dia-card label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .dia-card select,
+    .dia-card textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 10px;
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: #FFFFFF;
+    }
+
+    .dia-card select {
+      margin-bottom: 10px;
+    }
+
+    .dia-card textarea {
+      resize: vertical;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      .admin-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABEÇALHO PADRÃO APBEM -->
+  <div class="top-wrapper" style="padding-bottom: 24px;">
+    <header class="header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo" aria-label="Página inicial Apbem">
+          <div class="logo-group">
+            <img src="assets/img/logo_apbem.svg" alt="Logo da Apbem" class="logo-img">
+          </div>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+
+        <div class="nav-actions" id="navActions">
+          <nav>
+            <ul class="nav-list">
+              <li><a href="index.html#inicio">Início</a></li>
+              <li><a href="index.html#quem-somos">Quem Somos</a></li>
+              <li><a href="index.html#eventos">Eventos</a></li>
+              <li><a href="calendario.html">Calendário</a></li>
+              <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+          </nav>
+          <a href="index.html#doar" class="btn-doar" onclick="abrirModalDoacao(event)">DOAR</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL DO GERENCIADOR -->
+  <main class="admin-page">
+    <div class="container">
+
+      <div class="admin-header-bar">
+        <div>
+          <span class="hero-eyebrow">Área Administrativa</span>
+          <h1 class="admin-page-title">Gerenciador do Calendário de Medicações</h1>
+          <p class="admin-subtitle">
+            Preencha o cronograma mensal e clique em <strong id="textoInstrucaoBotao">Atualizar Dados</strong> para publicar imediatamente no calendário.
+          </p>
+        </div>
+
+        <a href="calendario.html" class="pill-btn pill-azul">Visualizar Calendário</a>
+      </div>
+
+      <!-- PAINEL DE CONFIGURAÇÕES GERAIS -->
+      <section class="admin-card" aria-label="Configurações gerais do mês">
+        <div class="admin-row">
+          <div class="admin-field">
+            <label for="mes">Mês de Referência</label>
+            <select id="mes" onchange="trocarMesOuAno()">
+              <option value="1">Janeiro</option>
+              <option value="2">Fevereiro</option>
+              <option value="3">Março</option>
+              <option value="4">Abril</option>
+              <option value="5">Maio</option>
+              <option value="6">Junho</option>
+              <option value="7">Julho</option>
+              <option value="8">Agosto</option>
+              <option value="9" selected>Setembro</option>
+              <option value="10">Outubro</option>
+              <option value="11">Novembro</option>
+              <option value="12">Dezembro</option>
+            </select>
+          </div>
+
+          <div class="admin-field">
+            <label for="ano">Ano</label>
+            <input type="number" id="ano" value="2026" min="2024" max="2099" onchange="trocarMesOuAno()">
+          </div>
+
+          <div class="admin-field">
+            <label for="bannerCampanha">Caminho do Banner (opcional)</label>
+            <input type="text" id="bannerCampanha" placeholder="Ex: assets/img/banner-campanha.jpg">
+          </div>
+
+          <div class="admin-field">
+            <label for="bannerAlt">Descrição do Banner (Acessibilidade)</label>
+            <input type="text" id="bannerAlt" placeholder="Ex: Campanha Setembro Amarelo">
+          </div>
+        </div>
+
+        <div class="admin-row">
+          <div class="admin-field">
+            <label for="horarioDispensacao">Horário de Dispensação</label>
+            <input type="text" id="horarioDispensacao" value="08h às 11:15h">
+          </div>
+
+          <div class="admin-field">
+            <label for="observacaoExtra">Aviso Destaque no Rodapé</label>
+            <input type="text" id="observacaoExtra" placeholder="Ex: BALANÇO Dia 24">
+          </div>
+
+          <div class="admin-field">
+            <label for="judicializadas">Medicações Judicializadas (separadas por vírgula)</label>
+            <input type="text" id="judicializadas" value="OCRELIZUMABE">
+          </div>
+        </div>
+
+        <div class="admin-actions">
+          <button type="button" class="btn-admin-novo" onclick="novoCalendario()">
+            + Novo Calendário
+          </button>
+          <button type="button" id="btnAtualizarDados" class="btn-admin-salvar" onclick="atualizarDadosInternamente()">
+            Atualizar Dados
+          </button>
+        </div>
+        <p id="statusSalvamento" style="display:none; margin:14px 0 0; font-weight:700; font-size:0.95rem;"></p>
+      </section>
+
+      <!-- GRADE DE EDIÇÃO DOS DIAS DO MÊS -->
+      <section aria-label="Edição diária de medicações e avisos">
+        <div class="dias-grid" id="diasContainer"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- MODAL DE DOAÇÃO PIX -->
+  <div id="modalDoacao" role="dialog" aria-modal="true" aria-labelledby="modalDoacaoTitulo"
+    style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.7); z-index:999; align-items:center; justify-content:center; padding:20px; overflow-y:auto;">
+    <div style="background:#fff; max-width:440px; width:100%; border-radius:24px; padding:28px 32px; position:relative; text-align:center; margin:auto;">
+      <button type="button" onclick="fecharModalDoacao()" aria-label="Fechar janela de doação"
+        style="position:absolute; top:16px; right:20px; border:none; background:none; font-size:1.5rem; cursor:pointer; color:#64748B;">&times;</button>
+      <span style="color:#EB8C28; font-weight:700; font-size:0.85rem; text-transform:uppercase;">Apoie a APBEM</span>
+      <h2 id="modalDoacaoTitulo" style="font-size:1.5rem; margin:6px 0 10px;">Faça sua Doação via Pix</h2>
+      <p style="font-size:0.9rem; color:#475569; margin-bottom:16px;">
+        100% do valor é destinado aos projetos de acolhimento e defesa dos nossos direitos na Paraíba.
+      </p>
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-bottom:12px;">
+        <button type="button" onclick="selecionarValor(10)" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">R$ 10</button>
+        <button type="button" onclick="selecionarValor(25)" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">R$ 25</button>
+        <button type="button" onclick="selecionarValor(50)" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">R$ 50</button>
+        <button type="button" onclick="selecionarValor('')" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">Livre</button>
+      </div>
+      <input type="number" id="valorDoacao" placeholder="Outro valor (R$) ou deixe em branco" min="1" step="0.01"
+        oninput="atualizarPixModal()"
+        style="width:100%; box-sizing:border-box; padding:12px 16px; border:2px solid #E2E8F0; border-radius:12px; font-size:1rem; margin-bottom:16px;">
+      <div style="background:#F8FAFC; padding:16px; border-radius:16px; border:1px dashed #CBD5E1; margin-bottom:16px;">
+        <div id="qrcodePixContainer" style="display:flex; justify-content:center; align-items:center; background:#fff; padding:12px; border-radius:12px; width:fit-content; margin:0 auto 12px; border:1px solid #E2E8F0;"></div>
+        <p style="font-size:0.8rem; color:#64748B; margin:0 0 4px;">Ou use a Chave Pix (CNPJ):</p>
+        <code id="chavePixTexto" style="font-size:1rem; font-weight:700; color:#2578D9;">05.592.284/0001-76</code>
+        <input type="hidden" id="payloadPixCopiaECola">
+      </div>
+      <button type="button" onclick="copiarPixCopiaECola()" class="pill-btn pill-azul" style="width:100%; border:none; cursor:pointer; padding:14px;">
+        Copiar Código Pix (Copia e Cola)
+      </button>
+      <p id="feedbackCopia" style="font-size:0.85rem; color:#16A34A; font-weight:600; margin-top:10px; display:none;">
+        Código Pix copiado!
+      </p>
+    </div>
+  </div>
+
+  <!-- RODAPÉ PADRÃO APBEM -->
+  <footer class="footer" id="contato">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text-group">
+            <img src="assets/img/logo_apbem.svg" alt="Logo da Apbem" class="logo-img">
+          </div>
+          <div class="footer-cnpj">
+            Associação Paraibana de Esclerose Múltipla<br>
+            CNPJ: 05.592.284/0001-76<br>
+            Rua Estudante Marizete da Silva Nascimento, 151<br>
+            Mangabeira VII, João Pessoa, Paraíba
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Instituição</h4>
+          <ul>
+            <li><a href="index_2.html#quem-somos">Sobre Nós</a></li>
+            <li><a href="calendario.html">Calendário de Medicação</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Eventos</h4>
+          <ul>
+            <li><a href="index_2.html#eventos">Caravana E.M.</a></li>
+            <li><a href="index_2.html#campanhas">Campanhas</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2026 &copy; Apbem | Desenvolvido com Amor</p>
+        <div class="footer-legal">
+          <a href="#termos">Termos de Uso</a>
+          <a href="#privacidade">Política de Privacidade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS SEPARADOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="assets/js/funcoes.js" defer></script>
+  <script src="assets/data/calendario.js"></script>
+  <script src="assets/js/admin-calendario.js" defer></script>
+
+  <!-- GERAÇÃO DA GRADE E SALVAMENTO DIRETO EM assets/data/calendario.json -->
+  <script>
+    let fileHandleCalendario = null;
+
+    function novoCalendario() {
+      const mesSelect = document.getElementById('mes');
+      const mes = parseInt(mesSelect.value, 10);
+      const ano = parseInt(document.getElementById('ano').value, 10);
+      const container = document.getElementById('diasContainer');
+      const status = document.getElementById('statusSalvamento');
+
+      container.innerHTML = '';
+      if (status) status.style.display = 'none';
+
+      const nomesDiasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+      const totalDias = new Date(ano, mes, 0).getDate();
+
+      for (let dia = 1; dia <= totalDias; dia++) {
+        const dataDia = new Date(ano, mes - 1, dia);
+        const diaSemanaIndex = dataDia.getDay();
+        const isFds = (diaSemanaIndex === 0 || diaSemanaIndex === 6);
+        const diaFormatado = String(dia).padStart(2, '0');
+
+        const card = document.createElement('div');
+        card.className = 'dia-card' + (isFds ? ' is-fds' : '');
+        card.setAttribute('data-dia', dia);
+
+        card.innerHTML = `
+          <div class="dia-card-header">
+            <span class="dia-card-titulo">Dia ${diaFormatado}</span>
+            <span class="dia-card-badge">${nomesDiasSemana[diaSemanaIndex]}</span>
+          </div>
+
+          <label for="tipo-dia-${dia}">Tipo do Dia</label>
+          <select id="tipo-dia-${dia}" class="campo-tipo-dia" onchange="atualizarEstiloCardDia(this)">
+            <option value="medicacao" ${!isFds ? 'selected' : ''}>Dispensação Normal</option>
+            <option value="aviso">Aviso / Sem Atendimento</option>
+            <option value="fds" ${isFds ? 'selected' : ''}>Fim de Semana</option>
+          </select>
+
+          <label for="texto-dia-${dia}">Medicações / Observação (1 por linha)</label>
+          <textarea 
+            id="texto-dia-${dia}" 
+            class="campo-texto-dia" 
+            rows="3" 
+            placeholder="${isFds ? 'SEM ATENDIMENTO' : 'EX:\nNATALIZUMABE\nFINGOLIMODE'}"
+          ></textarea>
+        `;
+
+        container.appendChild(card);
+      }
+
+      const btnPrincipal = document.getElementById('btnAtualizarDados');
+      btnPrincipal.textContent = 'Salvar';
+      btnPrincipal.setAttribute('onclick', 'salvarDiretoNoCalendarioJSON()');
+
+      const instrucao = document.getElementById('textoInstrucaoBotao');
+      if (instrucao) instrucao.textContent = 'Salvar';
+    }
+
+    function atualizarEstiloCardDia(selectEl) {
+      const card = selectEl.closest('.dia-card');
+      card.classList.remove('is-fds', 'is-aviso');
+
+      if (selectEl.value === 'fds') {
+        card.classList.add('is-fds');
+      } else if (selectEl.value === 'aviso') {
+        card.classList.add('is-aviso');
+      }
+    }
+
+    function montarObjetoCalendario() {
+      const mes = parseInt(document.getElementById('mes').value, 10);
+      const ano = parseInt(document.getElementById('ano').value, 10);
+      const bannerCampanha = document.getElementById('bannerCampanha').value.trim();
+      const bannerAlt = document.getElementById('bannerAlt').value.trim();
+      const horarioDispensacao = document.getElementById('horarioDispensacao').value.trim();
+      const observacaoExtra = document.getElementById('observacaoExtra').value.trim();
+      const judicializadasRaw = document.getElementById('judicializadas').value.trim();
+
+      const judicializadas = judicializadasRaw
+        ? judicializadasRaw.split(',').map(item => item.trim().toUpperCase()).filter(Boolean)
+        : [];
+
+      const dias = {};
+      document.querySelectorAll('#diasContainer .dia-card').forEach(card => {
+        const dia = card.getAttribute('data-dia');
+        const tipo = card.querySelector('.campo-tipo-dia').value;
+        const texto = card.querySelector('.campo-texto-dia').value.trim().toUpperCase();
+        const itens = texto ? texto.split('\n').map(l => l.trim()).filter(Boolean) : [];
+
+        if (itens.length > 0 || tipo === 'aviso') {
+          dias[dia] = {
+            tipo: tipo === 'fds' ? 'aviso' : tipo,
+            itens: itens
+          };
+        }
+      });
+
+      return {
+        ano: ano,
+        mes: mes,
+        bannerCampanha: bannerCampanha,
+        bannerAlt: bannerAlt,
+        horarioDispensacao: horarioDispensacao,
+        observacaoExtra: observacaoExtra,
+        judicializadas: judicializadas,
+        dias: dias
+      };
+    }
+
+    async function salvarDiretoNoCalendarioJSON() {
+      const dados = montarObjetoCalendario();
+      const jsonString = JSON.stringify(dados, null, 2);
+
+      // 1. Tenta salvar no servidor via PHP (atualiza assets/data/calendario.json e assets/data/calendario.js)
+      try {
+        const resposta = await fetch('salvar-calendario.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: jsonString
+        });
+
+        if (resposta.ok) {
+          const resultado = await resposta.json();
+          if (resultado.sucesso) {
+            exibirStatus('Arquivo assets/data/calendario.json atualizado diretamente com sucesso!', '#16A34A');
+            return;
+          }
+        }
+      } catch (e) {
+        // Sem PHP ativo; segue para sobrescrita local directa
+      }
+
+      // 2. Fallback local: sobrescreve directamente assets/data/calendario.json no disco
+      if ('showOpenFilePicker' in window) {
+        try {
+          if (!fileHandleCalendario) {
+            const [handle] = await window.showOpenFilePicker({
+              types: [{
+                description: 'Arquivo JSON (assets/data/calendario.json)',
+                accept: { 'application/json': ['.json'] }
+              }],
+              multiple: false
+            });
+            fileHandleCalendario = handle;
+          }
+
+          const writable = await fileHandleCalendario.createWritable();
+          await writable.write(jsonString);
+          await writable.close();
+
+          exibirStatus(`Arquivo "${fileHandleCalendario.name}" atualizado diretamente com sucesso!`, '#16A34A');
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') {
+            exibirStatus('Operação cancelada. Selecione assets/data/calendario.json para salvar.', '#B45309');
+            return;
+          }
+        }
+      }
+
+      exibirStatus('Não foi possível acessar o arquivo diretamente. Verifique o servidor PHP ou use Chrome/Edge.', '#DC2626');
+    }
+
+    function exibirStatus(mensagem, cor) {
+      const status = document.getElementById('statusSalvamento');
+      if (status) {
+        status.textContent = mensagem;
+        status.style.color = cor;
+        status.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>

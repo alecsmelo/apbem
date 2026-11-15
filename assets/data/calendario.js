@@ -1,0 +1,155 @@
+window.DADOS_CALENDARIO = {
+    "ano": 2026,
+    "mes": 11,
+    "bannerCampanha": "",
+    "bannerAlt": "",
+    "horarioDispensacao": "08h às 11:15h",
+    "observacaoExtra": "BALANÇO DIA 25",
+    "judicializadas": [
+        "OCRELIZUMABE"
+    ],
+    "dias": {
+        "2": {
+            "tipo": "aviso",
+            "itens": [
+                "FERIADO"
+            ]
+        },
+        "3": {
+            "tipo": "medicacao",
+            "itens": [
+                "TYSABRI",
+                "GABAPENTINA",
+                "TERIFLUNOMIDA"
+            ]
+        },
+        "4": {
+            "tipo": "medicacao",
+            "itens": [
+                "REBIF 44",
+                "REBIF 22"
+            ]
+        },
+        "5": {
+            "tipo": "medicacao",
+            "itens": [
+                "COPAXONE",
+                "FINGOLIMODE",
+                "BETAFERON"
+            ]
+        },
+        "6": {
+            "tipo": "medicacao",
+            "itens": [
+                "FUMARATO DE DIMETILA",
+                "AVONEX"
+            ]
+        },
+        "9": {
+            "tipo": "medicacao",
+            "itens": [
+                "AVONEX",
+                "REBIF 44",
+                "REBIF 22"
+            ]
+        },
+        "10": {
+            "tipo": "medicacao",
+            "itens": [
+                "FINGOLIMODE",
+                "TYSABRI"
+            ]
+        },
+        "11": {
+            "tipo": "medicacao",
+            "itens": [
+                "COPAXONE",
+                "GABAPENTINA"
+            ]
+        },
+        "12": {
+            "tipo": "medicacao",
+            "itens": [
+                "AZATIOPRINA",
+                "FUMARATO DE DIMETILA"
+            ]
+        },
+        "13": {
+            "tipo": "medicacao",
+            "itens": [
+                "TYSABRI",
+                "BETAFERON"
+            ]
+        },
+        "16": {
+            "tipo": "medicacao",
+            "itens": [
+                "FUMARATO DE DIMETILA",
+                "AZATIOPRINA"
+            ]
+        },
+        "17": {
+            "tipo": "medicacao",
+            "itens": [
+                "REBIF 44",
+                "REBIF 22",
+                "AVONEX"
+            ]
+        },
+        "18": {
+            "tipo": "medicacao",
+            "itens": [
+                "GABAPENTINA",
+                "TERIFLUNOMIDA",
+                "TYSABRI"
+            ]
+        },
+        "19": {
+            "tipo": "medicacao",
+            "itens": [
+                "COPAXONE",
+                "FINGOLIMODE",
+                "BETAFERON"
+            ]
+        },
+        "20": {
+            "tipo": "aviso",
+            "itens": []
+        },
+        "23": {
+            "tipo": "medicacao",
+            "itens": [
+                "FINGOLIMODE",
+                "AZATIOPRINA",
+                "GABAPENTINA",
+                "FUMARATO DE DIMETILA"
+            ]
+        },
+        "24": {
+            "tipo": "medicacao",
+            "itens": [
+                "ÚLTIMO DIA DE DISPENSAÇÃO"
+            ]
+        },
+        "25": {
+            "tipo": "aviso",
+            "itens": [
+                "BALANÇO"
+            ]
+        },
+        "26": {
+            "tipo": "aviso",
+            "itens": []
+        },
+        "27": {
+            "tipo": "aviso",
+            "itens": []
+        },
+        "30": {
+            "tipo": "aviso",
+            "itens": [
+                "ORGANIZAÇÃO DA FARMÁCIA"
+            ]
+        }
+    }
+};

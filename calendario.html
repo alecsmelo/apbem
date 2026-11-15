@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendário de Medicações — Apbem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="assets/css/calendario.css">
+</head>
+<body>
+
+  <!-- CABEÇALHO IGUAL AO INDEX -->
+  <div class="top-wrapper" style="padding-bottom: 24px;">
+    <header class="header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo" aria-label="Página inicial Apbem">
+          <div class="logo-group">
+            <img src="assets/img/logo_apbem.svg" alt="Logo da Apbem" class="logo-img">
+          </div>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+
+        <div class="nav-actions" id="navActions">
+          <nav>
+            <ul class="nav-list">
+              <li><a href="index.html">Início</a></li>
+              <li><a href="index.html#quem-somos">Quem Somos</a></li>
+              <li><a href="index.html#eventos">Eventos</a></li>
+              <li><a href="calendario.html" aria-current="page">Calendário</a></li>
+              <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+          </nav>
+          <a href="#doar" class="btn-doar" onclick="abrirModalDoacao(event)">DOAR</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL DO CALENDÁRIO -->
+  <main class="calendario-page">
+    <div class="container">
+      
+      <!-- Barra de Ferramentas e Filtro -->
+      <div class="cal-toolbar">
+        <div>
+          <span class="hero-eyebrow">Dispensação Farmacêutica</span>
+          <h1 class="cal-page-title">Calendário de Medicações</h1>
+        </div>
+
+        <div class="cal-filtros">
+          <label for="filtroMedicamento" class="sr-only">Filtrar medicamento</label>
+          <select id="filtroMedicamento" class="cal-select">
+            <option value="">Todos os medicamentos</option>
+          </select>
+          <button type="button" onclick="window.print()" class="pill-btn pill-azul" style="border:none; cursor:pointer;">
+            Imprimir / Salvar PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- ESPAÇO PARA BANNER DE CAMPANHA (EXIBIDO APENAS QUANDO HOUVER IMAGEM CONFIGURADA) -->
+      <div id="calBannerWrapper" class="cal-banner-wrapper" style="display:none;">
+        <img id="calBannerImg" src="" alt="Banner da Campanha Mensal">
+      </div>
+
+      <!-- QUADRO DO CALENDÁRIO -->
+      <section class="cal-board" id="calBoard" aria-label="Grade mensal de entrega de medicações">
+        <header class="cal-board-header">
+          <div class="cal-board-label">
+            <span>CALENDÁRIO</span>
+            <strong>MEDICAÇÕES</strong>
+          </div>
+          <div class="cal-board-mes">
+            <h2 id="calNomeMes">CARREGANDO...</h2>
+          </div>
+        </header>
+
+        <!-- Cabeçalho dos Dias da Semana -->
+        <div class="cal-weekdays">
+          <div class="cal-weekday is-weekend">DOMINGO</div>
+          <div class="cal-weekday">SEGUNDA</div>
+          <div class="cal-weekday">TERÇA</div>
+          <div class="cal-weekday">QUARTA</div>
+          <div class="cal-weekday">QUINTA</div>
+          <div class="cal-weekday">SEXTA</div>
+          <div class="cal-weekday is-weekend">SÁBADO</div>
+        </div>
+
+        <!-- Grade Dinâmica dos Dias -->
+        <div class="cal-grid" id="calGrid"></div>
+
+        <!-- Rodapé Informativo do Quadro -->
+        <footer class="cal-board-footer">
+          <div class="cal-info-box">
+            <strong>HORÁRIO DE DISPENSAÇÃO</strong>
+            <span id="calHorario">08h às 11:15h</span>
+          </div>
+          <div class="cal-info-box">
+            <strong>ATENÇÃO</strong>
+            <span>NÃO HAVERÁ DISPENSAÇÃO NOS DIAS EM VERMELHO OU FINAIS DE SEMANA</span>
+          </div>
+          <div class="cal-info-box cal-info-destaque">
+            <span id="calObsExtra">BALANÇO</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- INFORMATIVO DE RESPONSABILIDADE E ROL DE MEDICAÇÕES DO CREM -->
+      <section class="crem-info-card" aria-labelledby="cremTitulo">
+        <div class="crem-info-header">
+          <span class="crem-badge">Informação Importante aos Pacientes</span>
+          <h2 id="cremTitulo">Responsabilidade pela Dispensação</h2>
+          <p>
+            A gestão, agendamento e dispensação das medicações listadas neste calendário são de responsabilidade exclusiva do
+            <strong>CREM — Centro de Referência de Esclerose Múltipla da Paraíba</strong>.
+          </p>
+        </div>
+
+        <div class="crem-rol-grid">
+          <!-- Coluna 1: Rol Regular -->
+          <div class="crem-rol-box">
+            <h3>Rol de Medicações Dispensadas no CREM</h3>
+            <p class="crem-rol-desc">Medicações contempladas regularmente no cronograma mensal:</p>
+            <ul id="listaRolRegular" class="crem-med-list"></ul>
+          </div>
+
+          <!-- Coluna 2: Medicações Judicializadas -->
+          <div class="crem-rol-box is-judicial">
+            <h3>Dispensação Exclusiva via Judicialização</h3>
+            <p class="crem-rol-desc">Medicações que não integram o rol regular e são fornecidas somente mediante determinação judicial:</p>
+            <ul id="listaRolJudicial" class="crem-med-list"></ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- MODAL DE DOAÇÃO PIX -->
+  <div id="modalDoacao" role="dialog" aria-modal="true" aria-labelledby="modalDoacaoTitulo"
+    style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.7); z-index:999; align-items:center; justify-content:center; padding:20px; overflow-y:auto;">
+    <div style="background:#fff; max-width:440px; width:100%; border-radius:24px; padding:28px 32px; position:relative; text-align:center; margin:auto;">
+      <button type="button" onclick="fecharModalDoacao()" aria-label="Fechar janela de doação"
+        style="position:absolute; top:16px; right:20px; border:none; background:none; font-size:1.5rem; cursor:pointer; color:#64748B;">&times;</button>
+      <span style="color:#EB8C28; font-weight:700; font-size:0.85rem; text-transform:uppercase;">Apoie a APBEM</span>
+      <h2 id="modalDoacaoTitulo" style="font-size:1.5rem; margin:6px 0 10px;">Faça sua Doação via Pix</h2>
+      <p style="font-size:0.9rem; color:#475569; margin-bottom:16px;">
+        100% do valor é destinado aos projetos de acolhimento e defesa dos nossos direitos na Paraíba.
+      </p>
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-bottom:12px;">
+        <button type="button" onclick="selecionarValor(10)" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">R$ 10</button>
+        <button type="button" onclick="selecionarValor(25)" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">R$ 25</button>
+        <button type="button" onclick="selecionarValor(50)" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">R$ 50</button>
+        <button type="button" onclick="selecionarValor('')" class="pill-btn pill-laranja" style="border:none; cursor:pointer; padding:10px 6px;">Livre</button>
+      </div>
+      <input type="number" id="valorDoacao" placeholder="Outro valor (R$) ou deixe em branco" min="1" step="0.01"
+        oninput="atualizarPixModal()"
+        style="width:100%; box-sizing:border-box; padding:12px 16px; border:2px solid #E2E8F0; border-radius:12px; font-size:1rem; margin-bottom:16px;">
+      <div style="background:#F8FAFC; padding:16px; border-radius:16px; border:1px dashed #CBD5E1; margin-bottom:16px;">
+        <div id="qrcodePixContainer" style="display:flex; justify-content:center; align-items:center; background:#fff; padding:12px; border-radius:12px; width:fit-content; margin:0 auto 12px; border:1px solid #E2E8F0;"></div>
+        <p style="font-size:0.8rem; color:#64748B; margin:0 0 4px;">Ou use a Chave Pix (CNPJ):</p>
+        <code id="chavePixTexto" style="font-size:1rem; font-weight:700; color:#2578D9;">05.592.284/0001-76</code>
+        <input type="hidden" id="payloadPixCopiaECola">
+      </div>
+      <button type="button" onclick="copiarPixCopiaECola()" class="pill-btn pill-azul" style="width:100%; border:none; cursor:pointer; padding:14px;">
+        Copiar Código Pix (Copia e Cola)
+      </button>
+      <p id="feedbackCopia" style="font-size:0.85rem; color:#16A34A; font-weight:600; margin-top:10px; display:none;">
+        Código Pix copiado!
+      </p>
+    </div>
+  </div>
+
+  <!-- RODAPÉ IGUAL AO INDEX -->
+  <footer class="footer" id="contato">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text-group">
+            <img src="assets/img/logo_apbem.svg" alt="Logo da Apbem" class="logo-img">
+          </div>
+          <div class="footer-cnpj">
+            Associação Paraibana de Esclerose Múltipla<br>
+            CNPJ: 05.592.284/0001-76<br>
+            Rua Estudante Marizete da Silva Nascimento, 151<br>
+            Mangabeira VII, João Pessoa, Paraíba
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Instituição</h4>
+          <ul>
+            <li><a href="index.html#quem-somos">Sobre Nós</a></li>
+            <li><a href="calendario.html">Calendário de Medicação</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Eventos</h4>
+          <ul>
+            <li><a href="index.html#eventos">Caravana E.M.</a></li>
+            <li><a href="index.html#campanhas">Campanhas</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2026 &copy; Apbem | Desenvolvido com Amor</p>
+        <div class="footer-legal">
+          <a href="index.html#termos">Termos de Uso</a>
+          <a href="index.html#privacidade">Política de Privacidade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS OBRIGATÓRIOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="assets/js/funcoes.js" defer></script>
+  <script src="assets/data/calendario.js"></script>
+  <script src="assets/js/calendario.js" defer></script>
+
+</body>
+</html>

@@ -5,4 +5,9 @@ deployment:
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp index.html $DEPLOYPATH
     - /bin/cp estilo.css $DEPLOYPATH
+    - /bin/cp admin-calendario.html $DEPLOYPATH
+    - /bin/cp calendario.html $DEPLOYPATH
+    - /bin/cp salvar-calendario.php $DEPLOYPATH
+    - /bin/cp OpenAPI_BB_Pix_v2.json $DEPLOYPATH
+    
     

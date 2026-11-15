@@ -501,3 +501,50 @@
         align-items: flex-start;
       }
     }
+
+/* =========================================
+   PATROCINADORES EM LINHA (ESTILO LIMPO)
+   ========================================= */
+.footer-sponsors {
+  grid-column: 2 / -1; /* Começa exatamente na coluna de "Instituição" e vai até a direita */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.sponsor-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sponsor-slot:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.sponsor-slot img {
+  height: 46px;       /* Altura uniforme para todas as logos */
+  width: auto;        /* Mantém a proporção original de cada marca */
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Ajuste para telas menores (tablet e celular) */
+@media (max-width: 768px) {
+  .footer-sponsors {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 20px;
+  }
+
+  .sponsor-slot img {
+    height: 38px;
+  }
+}
