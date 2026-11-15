@@ -4,3 +4,5 @@ deployment:
     - export DEPLOYPATH=/home/apbemorgbr/public_html/
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp estilo.css $DEPLOYPATH
+    
