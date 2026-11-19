@@ -1,7 +1,7 @@
 <?php
 $host    = 'localhost:3306';
-$db      = 'apbem-wp';
-$user    = 'root';
+$db      = 'apbemorgbr_apbem';
+$user    = 'admin';
 $pass    = '';
 $charset = 'utf8mb4';
 
@@ -16,5 +16,5 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (PDOException $e) {
     error_log("Erro de conexão MySQL: " . $e->getMessage());
-    die("Erro interno ao conectar ao banco de dados.");
+    die("Erro interno ao conectar ao banco de dados." . $e->getMessage());
 }
