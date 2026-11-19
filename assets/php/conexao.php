@@ -1,8 +1,8 @@
 <?php
 $host    = 'localhost:3306';
 $db      = 'apbemorgbr_apbem';
-$user    = 'admin';
-$pass    = '';
+$user    = 'apbemorgbr_admin';
+$pass    = '@Fm020984!';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
