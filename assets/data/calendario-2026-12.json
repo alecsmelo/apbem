@@ -1,0 +1,169 @@
+{
+    "ano": 2026,
+    "mes": 12,
+    "bannerCampanha": "uploads/banner-20261120-202554-47fdc8.jpg",
+    "bannerAlt": "Campanha Novembro Azul: Contra o Câncer de Próstata",
+    "horarioDispensacao": "08h às 11:15h",
+    "observacaoExtra": "BALANÇO: Dia 15",
+    "judicializadas": [
+        "OCRELIZUMABE"
+    ],
+    "dias": {
+        "1": {
+            "tipo": "medicacao",
+            "itens": [
+                "TYSABRI",
+                "GABAPENTINA",
+                "AZATIOPRINA"
+            ]
+        },
+        "2": {
+            "tipo": "medicacao",
+            "itens": [
+                "AVONEX",
+                "BETAFERON",
+                "COPAXONE"
+            ]
+        },
+        "3": {
+            "tipo": "medicacao",
+            "itens": [
+                "REBIF 44",
+                "REBIF 22",
+                "TYSABRI"
+            ]
+        },
+        "4": {
+            "tipo": "medicacao",
+            "itens": [
+                "FINGOLIMODE",
+                "FUMARATO DE DIMETILA",
+                "GABAPENTINA"
+            ]
+        },
+        "7": {
+            "tipo": "medicacao",
+            "itens": [
+                "AVONEX",
+                "BETAFERON",
+                "COPAXONE"
+            ]
+        },
+        "8": {
+            "tipo": "aviso",
+            "itens": [
+                "FERIADO"
+            ]
+        },
+        "9": {
+            "tipo": "medicacao",
+            "itens": [
+                "REBIF 44",
+                "REBIF 22"
+            ]
+        },
+        "10": {
+            "tipo": "medicacao",
+            "itens": [
+                "FINGOLIMODE",
+                "FUMARATO DE DIMETILA"
+            ]
+        },
+        "11": {
+            "tipo": "medicacao",
+            "itens": [
+                "TYSABRI",
+                "GABAPENTINA",
+                "AZATIOPRINA"
+            ]
+        },
+        "14": {
+            "tipo": "medicacao",
+            "itens": [
+                "ÚLTIMO DIA",
+                "DE DISPENSAÇÃO"
+            ]
+        },
+        "15": {
+            "tipo": "aviso",
+            "itens": [
+                "BALANÇO"
+            ]
+        },
+        "16": {
+            "tipo": "aviso",
+            "itens": [
+                "ORGANIZAÇÃO",
+                "DA FARMÁCIA"
+            ]
+        },
+        "17": {
+            "tipo": "aviso",
+            "itens": [
+                "X"
+            ]
+        },
+        "18": {
+            "tipo": "aviso",
+            "itens": [
+                "CARAVANA",
+                "JOÃO PESSOA",
+                "FUNAD"
+            ]
+        },
+        "21": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        },
+        "22": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        },
+        "23": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        },
+        "24": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        },
+        "25": {
+            "tipo": "aviso",
+            "itens": [
+                "FERIADO NATAL"
+            ]
+        },
+        "28": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        },
+        "29": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        },
+        "30": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        },
+        "31": {
+            "tipo": "aviso",
+            "itens": [
+                "RECESSO"
+            ]
+        }
+    }
+}

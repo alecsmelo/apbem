@@ -122,8 +122,8 @@
 }
 
 .cal-weekday.is-weekend {
-  background: transparent;
-  color: #FFFFFF;
+  background: rgb(255, 136, 1);
+  color: #ffffff;
 }
 
 /* GRADE DOS DIAS */
@@ -146,7 +146,7 @@
 
 .cal-day.is-weekend,
 .cal-day.is-empty {
-  background: rgba(255, 210, 0, 0.45);
+  background: rgb(255, 136, 1);
   box-shadow: none;
 }
 

@@ -1,10 +1,10 @@
 window.DADOS_CALENDARIO = {
     "ano": 2026,
     "mes": 11,
-    "bannerCampanha": "",
-    "bannerAlt": "",
+    "bannerCampanha": "uploads/banner-20261120-202135-87afca.jpg",
+    "bannerAlt": "Campanha Novembro Azul: Contra o Câncer de Próstata",
     "horarioDispensacao": "08h às 11:15h",
-    "observacaoExtra": "BALANÇO DIA 25",
+    "observacaoExtra": "BALANÇO Dia 25",
     "judicializadas": [
         "OCRELIZUMABE"
     ],
@@ -78,7 +78,7 @@ window.DADOS_CALENDARIO = {
             "tipo": "medicacao",
             "itens": [
                 "TYSABRI",
-                "BETAFERON"
+                "BETAFERSON"
             ]
         },
         "16": {
@@ -92,8 +92,7 @@ window.DADOS_CALENDARIO = {
             "tipo": "medicacao",
             "itens": [
                 "REBIF 44",
-                "REBIF 22",
-                "AVONEX"
+                "REBIF 22"
             ]
         },
         "18": {
@@ -114,7 +113,9 @@ window.DADOS_CALENDARIO = {
         },
         "20": {
             "tipo": "aviso",
-            "itens": []
+            "itens": [
+                "FERIADO"
+            ]
         },
         "23": {
             "tipo": "medicacao",
@@ -128,7 +129,8 @@ window.DADOS_CALENDARIO = {
         "24": {
             "tipo": "medicacao",
             "itens": [
-                "ÚLTIMO DIA DE DISPENSAÇÃO"
+                "ÚLTIMO DIA",
+                "DE DISPENSAÇÃO"
             ]
         },
         "25": {
@@ -139,16 +141,24 @@ window.DADOS_CALENDARIO = {
         },
         "26": {
             "tipo": "aviso",
-            "itens": []
+            "itens": [
+                "CADASTRO",
+                "DE NOVOS",
+                "PRONTUÁRIOS"
+            ]
         },
         "27": {
             "tipo": "aviso",
-            "itens": []
+            "itens": [
+                "ORGANIZAÇÃO",
+                "DA FARMÁCIA"
+            ]
         },
         "30": {
             "tipo": "aviso",
             "itens": [
-                "ORGANIZAÇÃO DA FARMÁCIA"
+                "ORGANIZAÇÃO",
+                "DA FARMÁCIA"
             ]
         }
     }

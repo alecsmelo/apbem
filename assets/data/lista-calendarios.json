@@ -1,0 +1,22 @@
+{
+    "total": 2,
+    "publicado": "2026-11",
+    "calendarios": {
+        "2026-11": {
+            "chave": "2026-11",
+            "ano": 2026,
+            "mes": 11,
+            "arquivo": "assets/data/calendario-2026-11.json",
+            "bannerCampanha": "uploads/banner-20261120-202135-87afca.jpg",
+            "atualizadoEm": "2026-11-20 20:26:22"
+        },
+        "2026-12": {
+            "chave": "2026-12",
+            "ano": 2026,
+            "mes": 12,
+            "arquivo": "assets/data/calendario-2026-12.json",
+            "bannerCampanha": "uploads/banner-20261120-202554-47fdc8.jpg",
+            "atualizadoEm": "2026-11-20 20:26:06"
+        }
+    }
+}

@@ -47,12 +47,16 @@
   </footer>
 
   <!-- SCRIPTS OBRIGATÓRIOS -->  
+<!-- SCRIPTS OBRIGATÓRIOS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="assets/js/funcoes.js" defer></script>
-  <script src="assets/data/calendario.js"></script>
-  <script src="assets/js/calendario.js" defer></script>
-  <script src="assets/js/admin-calendario.js" defer></script>
-  <script src="assets/js/gerarcalendario.js" defer></script>
+  <script src="assets/data/calendario.js?v=<?php echo time(); ?>"></script>
+
+  <?php if (basename($_SERVER['PHP_SELF']) === 'admin-calendario.php'): ?>
+    <script src="assets/js/gerarcalendario.js?v=2" defer></script>
+  <?php else: ?>
+    <script src="assets/js/calendario.js" defer></script>
+  <?php endif; ?>
   
 </body>
 </html>

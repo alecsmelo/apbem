@@ -1,5 +1,5 @@
 <?php
-$host    = 'localhost:3306';
+$host    = 'mysql';
 $db      = 'apbemorgbr_apbem';
 $user    = 'apbemorgbr_admin';
 $pass    = '@Fm020984!';

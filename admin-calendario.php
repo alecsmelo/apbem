@@ -5,8 +5,7 @@ if (empty($_SESSION['admin_autenticado']) || $_SESSION['admin_autenticado'] !== 
     header('Location: login.php');
     exit;
 }
-?>
-<?php
+
 include 'assets/php/topo.php';
 ?>
 
@@ -19,11 +18,11 @@ include 'assets/php/topo.php';
           <span class="hero-eyebrow">Área Administrativa</span>
           <h1 class="admin-page-title">Gerenciador do Calendário de Medicações</h1>
           <p class="admin-subtitle">
-            Preencha o cronograma mensal e clique em <strong id="textoInstrucaoBotao">Atualizar Dados</strong> para publicar imediatamente no calendário.
+            Preencha o cronograma mensal, clique em <strong id="textoInstrucaoBotao">Salvar</strong> para guardar como rascunho ou em <strong>Publicar</strong> para exibir no site.
           </p>
         </div>
 
-        <a href="calendario.html" class="pill-btn pill-azul">Visualizar Calendário</a>
+        <a href="calendario.php" class="pill-btn pill-azul">Visualizar Calendário</a>
       </div>
 
       <!-- PAINEL DE CONFIGURAÇÕES GERAIS -->
@@ -53,8 +52,14 @@ include 'assets/php/topo.php';
           </div>
 
           <div class="admin-field">
-            <label for="bannerCampanha">Caminho do Banner (opcional)</label>
-            <input type="text" id="bannerCampanha" placeholder="Ex: assets/img/banner-campanha.jpg">
+            <label for="bannerUpload">Imagem do Banner (opcional)</label>
+            <input type="file" id="bannerUpload" accept="image/jpeg,image/png,image/webp" onchange="enviarBannerUpload(this)">
+            <input type="hidden" id="bannerCampanha" value="">
+            <div id="previewBannerContainer" style="display:none; margin-top:6px;">
+              <img id="previewBannerImg" src="" alt="Prévia do banner" style="max-height:48px; border-radius:4px; border:1px solid #cbd5e1; vertical-align:middle;">
+              <small id="textoBannerCaminho" style="margin-left:6px; color:#475569;"></small>
+              <button type="button" onclick="removerBanner()" style="margin-left:6px; font-size:0.75rem; color:#dc2626; background:none; border:none; cursor:pointer; text-decoration:underline;">Remover</button>
+            </div>
           </div>
 
           <div class="admin-field">
@@ -84,8 +89,14 @@ include 'assets/php/topo.php';
           <button type="button" class="btn-admin-novo" onclick="novoCalendario()">
             + Novo Calendário
           </button>
-          <button type="button" id="btnAtualizarDados" class="btn-admin-salvar" onclick="atualizarDadosInternamente()">
-            Atualizar Dados
+          <button type="button" class="btn-admin-novo" onclick="carregarCalendarioSalvoPorMesAno()">
+            Editar Calendário Salvo
+          </button>
+          <button type="button" id="btnAtualizarDados" class="btn-admin-salvar" onclick="salvarCalendario('salvar')">
+            Salvar
+          </button>
+          <button type="button" id="btnPublicarCalendario" class="pill-btn pill-azul" onclick="salvarCalendario('publicar')">
+            Publicar
           </button>
           <button type="button" class="btn-admin-sair" onclick="window.location.href='assets/php/logout.php'">
             Sair
