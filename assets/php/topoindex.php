@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/estilo.css">
   <link rel="stylesheet" href="assets/css/calendario.css">
   <link rel="stylesheet" href="assets/css/estiloadmincalendario.css">
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 </head>
 <body>
