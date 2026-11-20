@@ -9,6 +9,7 @@ deployment:
     - /bin/cp salvar-calendario.php $DEPLOYPATH
     - /bin/cp login.php $DEPLOYPATH
     - /bin/cp upload-banner.php $DEPLOYPATH
+    - /bin/cp -R upload $DEPLOYPATH
     
     
     
